@@ -15,8 +15,8 @@ Package.onUse(function(api) {
   api.use(['templating', 'spacebars', 'ui'], 'client');
   api.use('ecmascript');
   api.use("stevezhu:lodash@3.10.1");
+  api.use("twbs:bootstrap@3.3.5");
 
-  api.addAssets('client/yfForms.less', 'client');
 
   api.addFiles([
     'client/yfInput.html',
@@ -35,4 +35,5 @@ Package.onUse(function(api) {
       'yfInputField',
       'yfForm'
   ])
+  api.addAssets('client/styles/yfForms.less', 'client');
 });
