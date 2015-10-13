@@ -1,35 +1,35 @@
 Package.describe({
-  name: 'yp2:yfform',
-  version: '0.0.2-1',
-  summary: 'Forms for meteor',
-  git: 'git push -u origin master',
-  documentation: 'README.md'
+    name: 'yp2:yfform',
+    version: '0.0.2-2',
+    summary: 'Forms for meteor',
+    git: 'git push -u origin master',
+    documentation: 'README.md'
 });
 
-Package.onUse(function(api) {
-  api.versionsFrom('1.2.0.2');
-  api.use(['templating', 'spacebars', 'ui', 'less'], 'client');
-  api.use('ecmascript');
-  api.use("stevezhu:lodash@3.10.1");
-  api.use("twbs:bootstrap@3.3.5");
+Package.onUse(function (api) {
+    api.versionsFrom('1.2.0.2');
+    api.use(['templating', 'spacebars', 'ui', 'less'], 'client');
+    api.use('ecmascript');
+    api.use("stevezhu:lodash@3.10.1");
+    api.use("twbs:bootstrap@3.3.5");
 
 
-  api.addFiles([
-    'client/yfInput.html',
-    'client/yfInput.js'
-  ], "client");
+    api.addFiles([
+        'client/yfInput.html',
+        'client/yfInput.js',
+        'client/styles/yfForm.less'
+    ], "client");
 
-  api.addFiles([
-      'lib/validators/yfValidators.js',
-      'lib/yfFields.js',
-      'lib/yfForm.js'
-  ],['client','server']);
+    api.addFiles([
+        'lib/validators/yfValidators.js',
+        'lib/yfFields.js',
+        'lib/yfForm.js'
+    ], ['client', 'server']);
 
-  api.export([
-      'yfValidators',
-      'yfBaseField',
-      'yfInputField',
-      'yfForm'
-  ]);
-  api.addFiles('client/styles/yfForms.less', 'client');
+    api.export([
+        'yfValidators',
+        'yfBaseField',
+        'yfInputField',
+        'yfForm'
+    ]);
 });
