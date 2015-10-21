@@ -1,8 +1,9 @@
 "use strict";
 
 Template.yfForm.helpers({
-    canSubmit () {
+    yfFormCanSubmit () {
         let errors = Template.instance().fieldsErrors.all();
+        console.log('eeee', errors);
         return !!(_.keys(errors).length)
     },
     yfObj () {
