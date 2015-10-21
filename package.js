@@ -8,7 +8,7 @@ Package.describe({
 
 Package.onUse(function (api) {
     api.versionsFrom('1.2.0.2');
-    api.use(['templating', 'spacebars', 'ui', 'less'], 'client');
+    api.use(['templating', 'spacebars', 'ui', 'less', 'reactive-dict'], 'client');
     api.use('ecmascript');
     api.use("stevezhu:lodash@3.10.1");
     api.use("twbs:bootstrap@3.3.5");
@@ -17,6 +17,8 @@ Package.onUse(function (api) {
     api.addFiles([
         'client/yfInput.html',
         'client/yfInput.js',
+        'client/yfForm.html',
+        'client/yfForm.js',
         'client/styles/yfForm.less'
     ], "client");
 
