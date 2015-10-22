@@ -9,12 +9,28 @@ Template.yfInput.helpers({
     },
 
     error () {
-        //todo przenieść runFieldCallback errors tu - walidacja oraz zapiswyanie błędy
-        // podzielić błedy na validation ora save dla rozróżnienia callbacków. Callback na form będą inne.
+       // todo save error change
         let t = Template.instance(),
-            error = t.fieldError.get();
+            error = t.fieldError.get(),
+            form;
+
+        if (t.data.form) {
+            form = t.data.form
+
+        } else if (t.formTmpl) {
+            form = t.formTmpl.data.form
+        }
 
         if (error) {
+            if (form && form.fields) {
+                let field = form.fields[t.data.field];
+                if (error.error === 'validation') {
+                    yfForm.runFieldCallbacks(t, field.errorCallbacks)
+                } else if (error.error === 'save') {
+                    yfForm.runFieldCallbacks(t,field.saveErrorCallbacks)
+                }
+
+            }
             return error.reason
         }
     }

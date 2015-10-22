@@ -42,7 +42,7 @@ Template.yfForm.events({
 
                 } catch (error) {
                     // trzeba to przenieść do pola.
-                    yfForm.runFieldCallbacks(t, formObjField.errorCallbacks);
+                    //yfForm.runFieldCallbacks(t, formObjField.errorCallbacks);
                     t.fieldsErrors.set(fieldName, error);
                     console.log(error);
                 }
@@ -65,7 +65,7 @@ Template.yfForm.events({
                 if (error) {
                     console.log('save error', error);
                 }
-                // set error na podstawie zwracanego błędu
+                // set error na podstawie zwracanego błędu oraz pola
 
                 if (result) {
                     console.log('save success');
@@ -91,8 +91,17 @@ Template.yfForm.onCreated(function () {
     
     self.autorun(function () {
         self.data.obj = collection.findOne(self.data.obj._id);
-        // jak zmienia się obiekt musimy zmieniać wartości dla pól w fieldsVal - inaczej zapisuje
-        // stare dane po submicie
+        let fieldList = _.keys(self.fields.all());
+        for (let i = 0; i < fieldList.length; i++) {
+            let fieldName = fieldList[i];
+            let fieldValue = self.data.obj[fieldName];
+            if (fieldValue) {
+                // todo: usuwanie errorów jak są ?
+                self.fieldsVal.set(fieldName, fieldValue)
+            }
+        }
+        console.log('form values', self.fieldsVal.all() );
+
 
         console.log('form yfForm temp', self.data.obj);
         //console.log('reg fields: ', self.fields);
