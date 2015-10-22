@@ -2,9 +2,6 @@
 
 Template.yfInput.helpers({
     getParams () {
-        console.log('helper this', this);
-        //console.log('zz', this.obj = Template.instance().data.obj);
-
         return yfForm.fieldParams(this, Template.instance());
     },
 
