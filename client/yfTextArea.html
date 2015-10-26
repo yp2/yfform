@@ -1,0 +1,15 @@
+<template name="yfTextArea">
+    <div class="form-group yfForm">
+        {{#if getParams.placeholder}}
+            <label class="control-label yfForm">{{getParams.placeholder}}</label>
+        {{/if}}
+        <textarea {{getParams}}>{{ getParams.value }}</textarea>
+        <span class="glyphicon glyphicon-remove form-control-feedback yfForm error-feedback" aria-hidden="true" style="display: none"></span>
+        <span class="glyphicon glyphicon-ok form-control-feedback yfForm success-feedback" aria-hidden="true" style="display: none"></span>
+        {{#if error}}
+        <span class="help-block yfForm error-block">{{error}}</span>
+        {{/if}}
+        <span class="help-block yfForm save-block" style="display: none"><i class="fa fa-floppy-o"></i> Saved</span>
+        <!--<span class="help-block yfForm save-block" ><i class="fa fa-floppy-o"></i> Saved</span>-->
+    </div>
+</template>
