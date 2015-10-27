@@ -1,8 +1,7 @@
 <template name="yfForm">
-<form>
+<form {{ getParams }}>
 
         {{> Template.contentBlock yfFormCanSubmit=yfFormCanSubmit yfObj=yfObj}}
-        <!--{{> Template.contentBlock ..}}-->
 
 </form>
 </template>

@@ -7,6 +7,11 @@ Template.yfForm.helpers({
     },
     yfObj () {
         return Template.instance().data.obj;
+    },
+    getParams () {
+        let omitElements = ['method', 'form', 'collection', 'obj'];
+        return _.omit(this, omitElements);
+
     }
 
 });
