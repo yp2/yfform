@@ -48,7 +48,6 @@ Template.yfForm.events({
         };
 
         // walidacja dataForMethod
-        console.log('gggg', t.fieldsErrors.all());
         if (!_.keys(t.fieldsErrors.all()).length && t.data.method) {
 
             yfForm.runFormCallbacks(t, formObj.successCallbacks);
