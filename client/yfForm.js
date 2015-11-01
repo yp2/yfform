@@ -44,7 +44,8 @@ Template.yfForm.events({
             fieldsValues : t.fieldsVal.all(),
             fieldsErrors : t.fieldsErrors.all(),
             formFields : t.data.form ? t.data.form.fields : {},
-            collection : t.data.collection || ""
+            collection : t.data.collection || "",
+            formElementData: t.$("form").data() || {}
         };
 
         // walidacja dataForMethod
@@ -52,22 +53,40 @@ Template.yfForm.events({
 
             yfForm.runFormCallbacks(t, formObj.successCallbacks);
 
-            Meteor.call(t.data.method, dataForMethod, function (error, result) {
-                if (error) {
+            console.log('form type', typeof t.data.method);
+
+            if (typeof t.data.method === "string") {
+                Meteor.call(t.data.method, dataForMethod, function (error, result) {
+                    if (error) {
+                        yfForm.runFormCallbacks(t, formObj.saveErrorCallbacks);
+                        if (error.reason.field) {
+                            t.fieldsErrors.set(error.reason.field, new Meteor.Error('save', error.reason.reason));
+                        } else {
+                            console.log(error);
+                        }
+                    }
+
+                    if (result) {
+                        //run form success save callback
+                        yfForm.runFormCallbacks(t, formObj.saveSuccessCallbacks);
+                    }
+                });
+            } else {
+                try {
+                    t.data.method(dataForMethod);
+                    //run form success save callback
+                    yfForm.runFormCallbacks(t, formObj.saveSuccessCallbacks);
+
+                } catch (error) {
                     yfForm.runFormCallbacks(t, formObj.saveErrorCallbacks);
-                    if (error.reason.field) {
+
+                    if (error.reason && error.reason.field) {
                         t.fieldsErrors.set(error.reason.field, new Meteor.Error('save', error.reason.reason));
                     } else {
                         console.log(error);
                     }
-
                 }
-
-                if (result) {
-                    //run form succes save callback
-                    yfForm.runFormCallbacks(t, formObj.saveSuccessCallbacks);
-                }
-            });
+            }
         } else {
             yfForm.runFormCallbacks(t, formObj.errorCallbacks);
         }
