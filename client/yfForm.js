@@ -53,8 +53,6 @@ Template.yfForm.events({
 
             yfForm.runFormCallbacks(t, formObj.successCallbacks);
 
-            console.log('form type', typeof t.data.method);
-
             if (typeof t.data.method === "string") {
                 Meteor.call(t.data.method, dataForMethod, function (error, result) {
                     if (error) {
