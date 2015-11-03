@@ -1,7 +1,7 @@
 <template name="yfInput">
     <div class="form-group yfForm">
-        {{#if getParams.placeholder}}
-            <label class="control-label yfForm">{{getParams.placeholder}}</label>
+        {{#if getParams.label}}
+            <label class="control-label yfForm">{{getParams.label}}</label>
         {{/if}}
         <input {{getParams}}>
         <span class="glyphicon glyphicon-remove form-control-feedback yfForm error-feedback" aria-hidden="true" style="display: none"></span>
