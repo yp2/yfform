@@ -16,12 +16,16 @@ Package.onUse(function (api) {
 
 
     api.addFiles([
-        'client/yfInput.html',
-        'client/yfInput.js',
         'client/yfForm.html',
         'client/yfForm.js',
+        'client/yfInput.html',
+        'client/yfInput.js',
+        'client/yfInputF.html',
+        'client/yfInputF.js',
         'client/yfTextArea.html',
         'client/yfTextArea.js',
+        'client/yfTextAreaF.html',
+        'client/yfTextAreaF.js',
         'client/styles/yfForm.less'
     ], "client");
 
