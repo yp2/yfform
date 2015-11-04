@@ -12,6 +12,7 @@ Package.onUse(function (api) {
     api.use('ecmascript');
     api.use("stevezhu:lodash@3.10.1");
     api.use("twbs:bootstrap@3.3.5");
+    api.use("anti:i18n@0.4.3");
 
 
     api.addFiles([
@@ -27,7 +28,9 @@ Package.onUse(function (api) {
     api.addFiles([
         'lib/validators/yfValidators.js',
         'lib/yfFields.js',
-        'lib/yfForm.js'
+        'lib/yfForm.js',
+        'i18n/en.i18n.js',
+        'i18n/pl.i18n.js'
     ], ['client', 'server']);
 
     api.export([

@@ -6,10 +6,8 @@
         <input {{getParams}}>
         <span class="glyphicon glyphicon-remove form-control-feedback yfForm error-feedback" aria-hidden="true" style="display: none"></span>
         <span class="glyphicon glyphicon-ok form-control-feedback yfForm success-feedback" aria-hidden="true" style="display: none"></span>
-        {{#if error}}
-        <span class="help-block yfForm error-block">{{error}}</span>
-        {{/if}}
-        <span class="help-block yfForm save-block" style="display: none"><i class="fa fa-floppy-o"></i> Saved</span>
+        <span class="help-block yfForm error-block" style="display: none">{{error}}</span>
+        <span class="help-block yfForm save-block" style="display: none"><i class="fa fa-floppy-o"></i> {{ i18n 'templates.save' }}</span>
         <!--<span class="help-block yfForm save-block" ><i class="fa fa-floppy-o"></i> Saved</span>-->
     </div>
 </template>
