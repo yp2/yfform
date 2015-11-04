@@ -28,7 +28,7 @@ Template.yfForm.events({
                 let fieldName =  fieldsList[i];
                 let formObjField = formObj.fields[fieldName];
                 let formFieldValue = t.fieldsVal.get(fieldName) || (t.fields.get(fieldName) ? t.fields.get(fieldName).params.value: null);
-                console.log('gg', t.fieldsVal);
+                console.log('gg', t.fieldsVal, t.fields);
                 try {
                     console.log('tt', typeof formFieldValue);
                     let val = formObj.validateField(fieldName, formFieldValue);
@@ -54,8 +54,8 @@ Template.yfForm.events({
             collection : t.data.collection || "",
             formElementData: t.$("form").data() || {}
         };
-
-        // walidacja dataForMethod
+        //TODO: clean form after successful save based on option (t.fieldsVal, t.fields)
+        // validation dataForMethod
         if (!_.keys(t.fieldsErrors.all()).length && t.data.method) {
 
             yfForm.runFormCallbacks(t, formObj.successCallbacks);
