@@ -38,9 +38,9 @@ Template.yfTextAreaF.helpers({
 
 Template.yfTextAreaF.events({
     //'keyup input, change input': _.debounce(function(e, t){
-    'keyup textarea': _.debounce(function(e, t){
+    'keyup textarea': function(e, t){
         yfForm.processField(e,t);
-    }, 500 )
+    }
 });
 
 Template.yfTextAreaF.onCreated(function () {

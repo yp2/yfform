@@ -35,9 +35,9 @@ Template.yfInputF.helpers({
 
 Template.yfInputF.events({
     //'keyup input, change input': _.debounce(function(e, t){
-    'keyup input': _.debounce(function(e, t){
+    'keyup input': function(e, t){
         yfForm.processField(e,t);
-    }, 500 )
+    }
 
 });
 
