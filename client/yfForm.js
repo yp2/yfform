@@ -23,19 +23,18 @@ Template.yfForm.events({
         //fields validation on submit
         let formObj = t.data.form;
         if (formObj && formObj.fields) {
+
             let fieldsList = _.keys(t.fields.all()); // registered form fields
             for (let i = 0; i < fieldsList.length; i++ ){
                 let fieldName =  fieldsList[i];
                 let formObjField = formObj.fields[fieldName];
-                let formFieldValue = t.fieldsVal.get(fieldName) || (t.fields.get(fieldName) ? t.fields.get(fieldName).params.value: null);
-                console.log('gg', t.fieldsVal, t.fields);
+                //let formFieldValue = t.fieldsVal.get(fieldName) || (t.fields.get(fieldName) ? t.fields.get(fieldName).params.value: null);
+                let formFieldValue = t.fieldsVal.get(fieldName);
                 try {
-                    console.log('tt', typeof formFieldValue);
                     let val = formObj.validateField(fieldName, formFieldValue);
                     t.fieldsVal.set(fieldName, val);
                     yfForm.runFieldCallbacks(t, formObjField.successCallbacks);
                 } catch (error) {
-                    console.log('bb', typeof  formFieldValue);
                     if (!formFieldValue) {
                         t.fieldsVal.set(fieldName, null);
                     }
@@ -44,7 +43,7 @@ Template.yfForm.events({
                 }
             }
         }
-        
+
         let dataForMethod = {
             obj: t.data.obj || {},
             fields : t.fields.all(),
@@ -72,7 +71,10 @@ Template.yfForm.events({
                     }
 
                     if (result) {
+                        //TODO: po insercie możemy zwaraca obiekt i podstawić go pod data.obj
+                        //
                         //run form success save callback
+                        //t.data.obj = {title: 'gggg'};
                         yfForm.runFormCallbacks(t, formObj.saveSuccessCallbacks);
                     }
                 });
@@ -108,28 +110,31 @@ Template.yfForm.onCreated(function () {
     self.fieldsErrors = new ReactiveDict();
     
     self.autorun(function () {
-
-        if (!self.data.obj) {
-            self.data.obj = {};
-        }
-
-        let fieldList = _.keys(self.fields.all());
-        for (let i = 0; i < fieldList.length; i++) {
-            let fieldName = fieldList[i];
-            let fieldValue;
-
-            if (self.data.obj) {
-                fieldValue = self.data.obj[fieldName];
-            } else {
-                self.fieldsVal.delete(fieldName);
-                self.fieldsErrors.delete(fieldName);
-            }
-            if (fieldValue) {
-                self.fieldsVal.set(fieldName, fieldValue);
-                self.fieldsErrors.delete(fieldName);
-            }
-        }
     })
+    
+    //self.autorun(function () {
+    //
+    //    if (!self.data.obj) {
+    //        self.data.obj = {};
+    //    }
+    //    let fieldList = _.keys(self.fields.all());
+    //    for (let i = 0; i < fieldList.length; i++) {
+    //        let fieldName = fieldList[i];
+    //        let fieldValue;
+    //
+    //        if (self.data.obj) {
+    //            fieldValue = self.data.obj[fieldName];
+    //        } else {
+    //            self.fieldsVal.delete(fieldName);
+    //            self.fieldsErrors.delete(fieldName);
+    //        }
+    //        if (fieldValue) {
+    //            //console.log('set value', fieldName, fieldValue);
+    //            self.fieldsVal.set(fieldName, fieldValue);
+    //            self.fieldsErrors.delete(fieldName);
+    //        }
+    //    }
+    //})
 });
 
 Template.yfForm.onRendered(function () {
