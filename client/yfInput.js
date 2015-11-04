@@ -35,9 +35,9 @@ Template.yfInput.helpers({
 
 Template.yfInput.events({
     //'keyup input, change input': _.debounce(function(e, t){
-    'keyup input': _.debounce(function(e, t){
-        yfForm.processField(e,t);
-    }, 500 )
+    //'keyup input': _.debounce(function(e, t){
+    //    yfForm.processField(e,t);
+    //}, 500 )
 });
 
 Template.yfInput.onCreated(function () {
@@ -45,6 +45,21 @@ Template.yfInput.onCreated(function () {
 
     self.formTmpl = yfForm.getFormTemplate();
     self.fieldError = new ReactiveVar(null);
+
+    if (self.formTmpl) {
+        Template.yfInput.events({'keyup input': function(e, t){
+            var code = e.keyCode || e.which;
+            if(code != 13) {
+                yfForm.processField(e,t);
+            }
+        }})
+    } else {
+        Template.yfInput.events({
+            'keyup input': _.debounce(function(e, t){
+                yfForm.processField(e,t);
+            }, 500 )
+        })
+    }
 
     self.autorun(function () {
         if (self.formTmpl) {

@@ -28,11 +28,18 @@ Template.yfForm.events({
                 let fieldName =  fieldsList[i];
                 let formObjField = formObj.fields[fieldName];
                 let formFieldValue = t.fieldsVal.get(fieldName) || (t.fields.get(fieldName) ? t.fields.get(fieldName).params.value: null);
+                console.log('gg', t.fieldsVal);
                 try {
+                    console.log('tt', typeof formFieldValue);
                     let val = formObj.validateField(fieldName, formFieldValue);
                     t.fieldsVal.set(fieldName, val);
-
+                    yfForm.runFieldCallbacks(t, formObjField.successCallbacks);
                 } catch (error) {
+                    console.log('bb', typeof  formFieldValue);
+                    if (!formFieldValue) {
+                        t.fieldsVal.set(fieldName, null);
+                    }
+                    t.fieldsVal.set(fieldName, formFieldValue);
                     t.fieldsErrors.set(fieldName, error);
                 }
             }
