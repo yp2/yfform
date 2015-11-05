@@ -112,29 +112,29 @@ Template.yfForm.onCreated(function () {
     self.autorun(function () {
     })
     
-    //self.autorun(function () {
-    //
-    //    if (!self.data.obj) {
-    //        self.data.obj = {};
-    //    }
-    //    let fieldList = _.keys(self.fields.all());
-    //    for (let i = 0; i < fieldList.length; i++) {
-    //        let fieldName = fieldList[i];
-    //        let fieldValue;
-    //
-    //        if (self.data.obj) {
-    //            fieldValue = self.data.obj[fieldName];
-    //        } else {
-    //            self.fieldsVal.delete(fieldName);
-    //            self.fieldsErrors.delete(fieldName);
-    //        }
-    //        if (fieldValue) {
-    //            //console.log('set value', fieldName, fieldValue);
-    //            self.fieldsVal.set(fieldName, fieldValue);
-    //            self.fieldsErrors.delete(fieldName);
-    //        }
-    //    }
-    //})
+    self.autorun(function () {
+
+        if (!self.data.obj) {
+            self.data.obj = {};
+        }
+        let fieldList = _.keys(self.fields.all());
+        for (let i = 0; i < fieldList.length; i++) {
+            let fieldName = fieldList[i];
+            let fieldValue;
+
+            if (self.data.obj) {
+                fieldValue = self.data.obj[fieldName];
+            } else {
+                self.fieldsVal.delete(fieldName);
+                self.fieldsErrors.delete(fieldName);
+            }
+            if (fieldValue) {
+                //console.log('set value', fieldName, fieldValue);
+                self.fieldsVal.set(fieldName, fieldValue);
+                self.fieldsErrors.delete(fieldName);
+            }
+        }
+    })
 });
 
 Template.yfForm.onRendered(function () {
