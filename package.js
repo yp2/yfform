@@ -1,6 +1,6 @@
 Package.describe({
     name: 'yp2:yfform',
-    version: '0.3.6',
+    version: '0.3.7',
     summary: 'Forms for meteor',
     git: 'git push -u origin master',
     documentation: 'README.md'
@@ -22,6 +22,8 @@ Package.onUse(function (api) {
         'client/yfInput.js',
         'client/yfInputF.html',
         'client/yfInputF.js',
+        'client/yfSelect.html',
+        'client/yfSelect.js',
         'client/yfTextArea.html',
         'client/yfTextArea.js',
         'client/yfTextAreaF.html',
@@ -41,6 +43,7 @@ Package.onUse(function (api) {
         'yfValidators',
         'yfBaseField',
         'yfInputField',
+        'yfSelectField',
         'yfTextAreaField',
         'yfForm'
     ]);
