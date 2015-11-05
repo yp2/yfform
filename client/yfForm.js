@@ -23,17 +23,17 @@ Template.yfForm.events({
         //fields validation on submit
         let formObj = t.data.form;
         if (formObj && formObj.fields) {
+
             let fieldsList = _.keys(t.fields.all()); // registered form fields
             for (let i = 0; i < fieldsList.length; i++ ){
                 let fieldName =  fieldsList[i];
                 let formObjField = formObj.fields[fieldName];
-                let formFieldValue = t.fieldsVal.get(fieldName) || (t.fields.get(fieldName) ? t.fields.get(fieldName).params.value: null);
-                console.log('field', formObjField);
+                //let formFieldValue = t.fieldsVal.get(fieldName) || (t.fields.get(fieldName) ? t.fields.get(fieldName).params.value: null);
+                let formFieldValue = t.fieldsVal.get(fieldName);
                 try {
                     let val = formObj.validateField(fieldName, formFieldValue);
                     t.fieldsVal.set(fieldName, val);
-                    //yfForm.runFormFieldCallbacks(yfFormt, fieldName, formObjField.successCallbacks);
-                    yfForm.runFieldCallbacks(t, formObjField.successCallbacks, fieldName);
+                    yfForm.runFieldCallbacks(t, formObjField.successCallbacks);
                 } catch (error) {
                     if (!formFieldValue) {
                         t.fieldsVal.set(fieldName, null);
@@ -43,7 +43,7 @@ Template.yfForm.events({
                 }
             }
         }
-        
+
         let dataForMethod = {
             obj: t.data.obj || {},
             fields : t.fields.all(),
@@ -53,8 +53,8 @@ Template.yfForm.events({
             collection : t.data.collection || "",
             formElementData: t.$("form").data() || {}
         };
-
-        // walidacja dataForMethod
+        //TODO: clean form after successful save based on option (t.fieldsVal, t.fields)
+        // validation dataForMethod
         if (!_.keys(t.fieldsErrors.all()).length && t.data.method) {
 
             yfForm.runFormCallbacks(t, formObj.successCallbacks);
@@ -71,6 +71,8 @@ Template.yfForm.events({
                     }
 
                     if (result) {
+                        //TODO: po insercie możemy zwaraca obiekt i podstawić go pod data.obj
+                        //
                         //run form success save callback
                         yfForm.runFormCallbacks(t, formObj.saveSuccessCallbacks);
                     }

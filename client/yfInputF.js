@@ -1,6 +1,6 @@
 "use strict";
 
-Template.yfInput.helpers({
+Template.yfInputF.helpers({
     getParams () {
         return yfForm.fieldParams(this, Template.instance());
     },
@@ -33,15 +33,15 @@ Template.yfInput.helpers({
     }
 });
 
-Template.yfInput.events({
+Template.yfInputF.events({
     //'keyup input, change input': _.debounce(function(e, t){
-    'keyup input': _.debounce(function(e, t){
+    'keyup input': function(e, t){
         yfForm.processField(e,t);
-    }, 500 )
+    }
 
 });
 
-Template.yfInput.onCreated(function () {
+Template.yfInputF.onCreated(function () {
     var self = this;
 
     self.formTmpl = yfForm.getFormTemplate();
@@ -58,11 +58,11 @@ Template.yfInput.onCreated(function () {
 
 });
 
-Template.yfInput.onRendered(function () {
+Template.yfInputF.onRendered(function () {
     //add your statement here
 });
 
-Template.yfInput.onDestroyed(function () {
+Template.yfInputF.onDestroyed(function () {
     //add your statement here
 });
 
