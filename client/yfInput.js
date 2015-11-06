@@ -33,12 +33,21 @@ Template.yfInput.helpers({
     }
 });
 
-Template.yfInput.events({
-    //'keyup input, change input': _.debounce(function(e, t){
-    'keyup input': _.debounce(function(e, t){
-        yfForm.processField(e,t);
-    }, 500 )
+let debEvent = _.debounce(function (e, t) {
+    yfForm.processField(e,t);
+}, 500);
 
+Template.yfInput.events({
+    'keyup input': function (e,t) {
+        if (!t.formTmpl) {
+            debEvent(e,t)
+        } else {
+            yfForm.processField(e,t);
+        }
+    },
+    'blur input': function (e, t) {
+        yfForm.processField(e, t, false);
+    }
 });
 
 Template.yfInput.onCreated(function () {

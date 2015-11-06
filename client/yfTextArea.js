@@ -36,11 +36,22 @@ Template.yfTextArea.helpers({
     }
 });
 
+let debEvent = _.debounce(function (e, t) {
+    yfForm.processField(e,t);
+}, 500);
+
 Template.yfTextArea.events({
-    //'keyup input, change input': _.debounce(function(e, t){
-    'keyup textarea': _.debounce(function(e, t){
+    'keyup textarea': function(e, t){
+        if (!t.formTmpl) {
+            debEvent(e,t)
+        } else {
+            yfForm.processField(e,t);
+        }
         yfForm.processField(e,t);
-    }, 500 )
+    },
+    'blur input': function (e, t) {
+        yfForm.processField(e, t, false);
+    }
 });
 
 Template.yfTextArea.onCreated(function () {
