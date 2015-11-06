@@ -2,7 +2,6 @@
 
 Template.yfSelect.helpers({
     getParams () {
-        console.log('ada', this);
         return yfForm.fieldParams(this, Template.instance());
     },
 
