@@ -2,7 +2,7 @@ Package.describe({
     name: 'yp2:yfform',
     version: '0.3.9',
     summary: 'Forms for meteor',
-    git: 'git push -u origin master',
+    git: 'https://github.com/yp2/yfform',
     documentation: 'README.md'
 });
 
