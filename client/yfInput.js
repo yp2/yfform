@@ -42,7 +42,7 @@ Template.yfInput.events({
         if (!t.formTmpl) {
             debEvent(e,t)
         } else {
-            yfForm.processField(e,t);
+            yfForm.processField(e,t, false);
         }
     },
     'blur input': function (e, t) {
